@@ -1,5 +1,5 @@
 <launch>
-    <rosparam command="load" file="$(find mavbase)/config/mavros_params.yaml"/>
+    <rosparam command="load" file="$(find mavbase)/config/mavros_params.yaml"/> 
     <param name="/vel_topic" value="/mavros/setpoint_velocity/cmd_vel"/>
     <node pkg="throw_from_baloon" name="throw" type="throw.py" output="screen"/>
 </launch>
