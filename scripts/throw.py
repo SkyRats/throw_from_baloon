@@ -46,21 +46,29 @@ class ThrowFromBaloon():
     
     def run (self):
         self.drone.arm(True)
-        rospy.loginfo("ARMING")
         while(not rospy.is_shutdown()):
+            self.drone.set_position(0,0,2)
+            rospy.loginfo("INDOO ")
+        '''
+        rospy.loginfo("OFFBOARDING")
+        self.drone.set_mode("OFFBOARD", 2)
+        self.drone.arm(True)
+        rospy.loginfo("ARMED")
+        while(not rospy.is_shutdown()):
+            #self.drone.set_vel(0,0,100,1,1,1)
             if not self.droneState.armed:
                 self.drone.arm(True)
                 rospy.loginfo("ARMING")
-            rospy.loginfo("Vel(Z) = " + str(self.vlz))
+            #rospy.loginfo("Vel(Z) = " + str(self.vlz))
             #print("Vel: " + self.vlz )
             if self.vlz < -3:
                 rospy.loginfo('FALL DETECTED!!!')
-                self.drone.takeoff(4)
-                self.drone.hold(10)
-            self.drone.hold(0.1)
+                self.drone.fast_takeoff(1)
+                rospy.loginfo('TAKEOFFED!!!')
+                self.drone.set_position(0,0,40)
             #self.setStabilizeMode()
-            
-
+        '''
+ 
 
 if __name__ == '__main__':
     rospy.init_node('throw')
